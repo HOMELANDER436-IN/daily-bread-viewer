@@ -1,0 +1,234 @@
+/* ============================================================
+   Daily Bread — Viewer App — Components CSS
+   Counselling Form, About, Buttons, Forms
+   ============================================================ */
+
+/* ─── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 2px 8px rgba(63, 95, 82, 0.25);
+}
+.btn-primary:hover { background: var(--primary-dark); box-shadow: 0 4px 14px rgba(63, 95, 82, 0.35); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+.btn-outline:hover { background: rgba(63,95,82,0.06); }
+
+.btn-full { width: 100%; }
+
+.btn:disabled, .btn.loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn .spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ─── Form Elements ─────────────────────────────────────────── */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 7px;
+}
+
+.form-required { color: var(--error); margin-left: 2px; }
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--card-bg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  appearance: none;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(63, 95, 82, 0.1);
+}
+
+.form-input.error, .form-textarea.error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(201, 76, 76, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+.form-error-msg {
+  font-size: 0.78rem;
+  color: var(--error);
+  margin-top: 5px;
+  display: none;
+}
+.form-error-msg.show { display: block; }
+
+.form-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+/* ─── Counselling Page ──────────────────────────────────────── */
+.counselling-header {
+  margin-bottom: 24px;
+}
+
+.counselling-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.counselling-header p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.counselling-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+}
+
+/* ─── Success Screen ─────────────────────────────────────────── */
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 40px 24px;
+}
+.success-screen.show { display: block; }
+.success-screen .success-icon {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+  display: block;
+}
+.success-screen h2 {
+  font-size: 1.3rem;
+  color: var(--success);
+  margin-bottom: 10px;
+}
+.success-screen p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* ─── About Page ─────────────────────────────────────────────── */
+.about-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 28px 24px;
+  text-align: center;
+}
+.about-icon { font-size: 3rem; margin-bottom: 16px; }
+.about-card h2 { color: var(--primary); margin-bottom: 12px; }
+.about-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 12px; }
+
+/* ─── Page Section Header ────────────────────────────────────── */
+.section-header {
+  margin-bottom: 20px;
+}
+.section-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.section-header p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* ─── Meta Date ──────────────────────────────────────────────── */
+.message-meta {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ─── Scroll to top button ───────────────────────────────────── */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 50;
+}
+.scroll-top-btn.visible { opacity: 1; pointer-events: all; }
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  :root { font-size: 14px; }
+  .page-content { padding: 0 12px 80px; padding-top: calc(var(--header-h) + 12px); }
+  .message-body { padding: 16px 18px 20px; }
+  .reaction-bar { padding: 0 18px 16px; gap: 8px; }
+  .reaction-btn { padding: 7px 12px; font-size: 0.85rem; min-width: 70px; }
+}
+
+@media (min-width: 480px) {
+  .page-content { padding: 0 24px 80px; padding-top: calc(var(--header-h) + 24px); }
+  .message-body { padding: 24px 32px 28px; }
+  .reaction-bar { padding: 0 32px 24px; }
+}

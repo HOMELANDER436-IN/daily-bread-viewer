@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Daily Bread — Counselling. Submit a private prayer or counselling request.">
+  <meta name="theme-color" content="#3F5F52">
+  <title>Daily Bread — Counselling</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Mobile & PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body data-page="counselling">
+
+  <!-- Drawer Overlay -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <!-- Navigation Drawer -->
+  <nav class="drawer" id="app-drawer" role="navigation" aria-label="Main navigation">
+    <div class="drawer-header">
+      <div class="drawer-logo" data-i18n="appName">Daily Bread</div>
+      <div class="drawer-tagline" data-i18n="tagline">God's Word, Every Day</div>
+    </div>
+    <ul class="drawer-nav" style="list-style:none">
+      <li>
+        <a href="index.html" data-nav="home">
+          <span class="nav-icon">🏠</span>
+          <span data-i18n="home">Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="counselling.html" data-nav="counselling" class="active" aria-current="page">
+          <span class="nav-icon">🕊️</span>
+          <span data-i18n="counselling">Counselling</span>
+        </a>
+      </li>
+      <li><div class="drawer-divider"></div></li>
+      <li>
+        <a href="#" onclick="return false;" style="cursor:default;padding-bottom:6px">
+          <span class="nav-icon">🌐</span>
+          <span data-i18n="language">Language</span>
+        </a>
+        <div class="lang-toggle" style="padding:0 24px 14px">
+          <button class="lang-btn active" data-lang="en" onclick="window.switchLanguage('en')">English</button>
+          <button class="lang-btn" data-lang="ml" onclick="window.switchLanguage('ml')">മലയാളം</button>
+        </div>
+      </li>
+      <li>
+        <a href="about.html" data-nav="about">
+          <span class="nav-icon">ℹ️</span>
+          <span data-i18n="about">About</span>
+        </a>
+      </li>
+    </ul>
+    <div class="drawer-footer">
+      <p style="font-size:0.75rem;color:var(--text-light);text-align:center">Daily Bread © 2026</p>
+    </div>
+  </nav>
+
+  <!-- App Wrapper -->
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo" data-i18n="appName">Daily Bread</div>
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="app-drawer">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+
+      <!-- Counselling Header -->
+      <div class="counselling-header">
+        <h1 data-i18n="counsellingTitle">Need someone to talk to?</h1>
+        <p data-i18n="counsellingDesc">If you would like prayer, guidance, or counselling, you can send a private request. Your message is confidential.</p>
+      </div>
+
+      <!-- Success Screen (hidden by default) -->
+      <div class="success-screen" id="success-screen" aria-live="polite">
+        <span class="success-icon">✅</span>
+        <h2 data-i18n="successTitle">Request Submitted</h2>
+        <p data-i18n="successMsg">Thank you for reaching out. Your request has been submitted. Someone will get in touch with you soon.</p>
+        <button class="btn btn-outline" id="send-another-btn" data-i18n="sendAnother">Send Another Request</button>
+      </div>
+
+      <!-- Counselling Form Card -->
+      <div class="counselling-card" id="form-card">
+        <form id="counselling-form" novalidate>
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <label class="form-label" for="full-name">
+              <span data-i18n="fullName">Full Name</span>
+              <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input
+              class="form-input"
+              type="text"
+              id="full-name"
+              name="full_name"
+              autocomplete="name"
+              required
+              maxlength="100"
+              aria-required="true"
+              aria-describedby="full-name-error"
+            >
+            <div class="form-error-msg" id="full-name-error" role="alert"></div>
+          </div>
+
+          <!-- Contact Number -->
+          <div class="form-group">
+            <label class="form-label" for="contact-number">
+              <span data-i18n="contactNumber">Contact Number</span>
+              <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input
+              class="form-input"
+              type="tel"
+              id="contact-number"
+              name="contact_number"
+              autocomplete="tel"
+              required
+              maxlength="20"
+              aria-required="true"
+              aria-describedby="contact-number-error"
+            >
+            <div class="form-error-msg" id="contact-number-error" role="alert"></div>
+          </div>
+
+          <!-- Message / Comment (optional) -->
+          <div class="form-group">
+            <label class="form-label" for="comment">
+              <span data-i18n="messageComment">Message / Comment</span>
+            </label>
+            <textarea
+              class="form-textarea"
+              id="comment"
+              name="comment"
+              maxlength="2000"
+              aria-describedby="comment-hint"
+            ></textarea>
+            <div class="form-hint" id="comment-hint" data-i18n="messageOptional">
+              Optional — share what's on your heart
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button class="btn btn-primary btn-full" type="submit" id="submit-btn">
+            <span id="submit-spinner" style="display:none" class="spinner" aria-hidden="true"></span>
+            <span id="submit-btn-text" data-i18n="sendRequest">Send Request</span>
+          </button>
+
+        </form>
+      </div>
+
+    </main>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
