@@ -61,7 +61,6 @@ function renderMessage(message, reactionData) {
   container.innerHTML = `
     <div class="message-card" id="msg-card">
       <div class="message-card-label" data-i18n="todayMessage">${t('todayMessage')}</div>
-      ${message.image_url ? `<img class="message-image" src="${escapeHtml(message.image_url)}" alt="Message image" loading="lazy">` : ''}
       <div class="message-body">
         ${message.title ? `<h2 class="message-title">${escapeHtml(message.title)}</h2>` : ''}
         <p class="message-content">${escapeHtml(message.content)}</p>

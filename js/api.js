@@ -5,7 +5,7 @@
 
 import { BASE_URL } from './config.js';
 
-const DEFAULT_TIMEOUT = 10000; // 10 seconds
+const DEFAULT_TIMEOUT = 60000; // 60 seconds (allows for Render free tier cold-start wakeup)
 
 /**
  * Core fetch wrapper with timeout and error normalization.
