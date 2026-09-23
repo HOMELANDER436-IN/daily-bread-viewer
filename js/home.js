@@ -68,7 +68,6 @@ function renderMessage(message, reactionData) {
           <div class="message-reference">${escapeHtml(message.reference)}</div>
         ` : ''}
         <div class="message-meta">
-          <span>📅</span>
           <span>${formatDate(message.created_at, lang)}</span>
         </div>
       </div>
@@ -247,17 +246,64 @@ export async function checkPrayerBanner() {
   }
 }
 
-// ─── Refresh Handler ──────────────────────────────────────────
-export function setupRefresh() {
-  const btn = document.getElementById('refresh-btn');
-  if (!btn) return;
-  btn.addEventListener('click', async () => {
-    btn.classList.add('loading');
-    btn.disabled = true;
-    await loadMessage(false);
-    await checkPrayerBanner();
-    btn.classList.remove('loading');
-    btn.disabled = false;
+// ─── Silent Background Refresh ───────────────────────────────
+let refreshTimer = null;
+
+export async function silentCheckForUpdates() {
+  try {
+    const message = await getLatestMessage();
+    if (!message) {
+      if (currentMessage) showEmpty();
+      return;
+    }
+
+    const isNew = !currentMessage || currentMessage.id !== message.id;
+    const isUpdated = currentMessage && (
+      currentMessage.content !== message.content ||
+      currentMessage.title !== message.title ||
+      currentMessage.reference !== message.reference
+    );
+
+    if (isNew || isUpdated) {
+      setCachedMessage(message);
+      const deviceId = getDeviceId();
+      let reactionData = null;
+      try {
+        reactionData = await getReactions(message.id, deviceId);
+      } catch {
+        // Non-critical
+      }
+      renderMessage(message, reactionData);
+    }
+
+    checkPrayerBanner();
+  } catch {
+    // Silent fail in background — do not disturb user
+  }
+}
+
+export function setupSilentBackgroundRefresh() {
+  // 1. Silent interval approx every hour (60 minutes)
+  if (refreshTimer) clearInterval(refreshTimer);
+  refreshTimer = setInterval(() => {
+    silentCheckForUpdates();
+  }, 60 * 60 * 1000);
+
+  // 2. Foreground wakeup on visibility change
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      silentCheckForUpdates();
+    }
+  });
+
+  // 3. Window focus
+  window.addEventListener('focus', () => {
+    silentCheckForUpdates();
+  });
+
+  // 4. Network online event
+  window.addEventListener('online', () => {
+    silentCheckForUpdates();
   });
 }
 

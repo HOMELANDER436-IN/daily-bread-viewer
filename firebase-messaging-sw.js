@@ -23,11 +23,12 @@ messaging.onBackgroundMessage((payload) => {
   const { title, body, icon } = payload.notification || {};
   const data = payload.data || {};
 
-  const notificationTitle = title || '🙏 Daily Bread';
+  const notificationTitle = title || 'Daily Bread';
   const notificationOptions = {
     body: body || '',
     icon: icon || '/assets/icon-192.png',
     badge: '/assets/badge-72.png',
+    sound: (self.location && self.location.origin ? self.location.origin : '') + '/assets/church_bell.mp3',
     tag: data.type === 'prayer' ? 'prayer-notification' : 'daily-bread',
     renotify: false,
     requireInteraction: false,

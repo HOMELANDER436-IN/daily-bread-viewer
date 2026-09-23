@@ -6,7 +6,7 @@
 import { setLocale, t, getLang } from './i18n.js';
 import { getLanguage, setLanguage } from './storage.js';
 import { initNotifications } from './notifications.js';
-import { loadMessage, checkPrayerBanner, setupRefresh } from './home.js';
+import { loadMessage, checkPrayerBanner, setupSilentBackgroundRefresh } from './home.js';
 import { initCounsellingForm } from './counselling.js';
 
 // ─── Page Detection ───────────────────────────────────────────
@@ -44,8 +44,8 @@ async function initHome() {
   // Check prayer banner
   checkPrayerBanner().catch(console.warn);
 
-  // Set up refresh button
-  setupRefresh();
+  // Set up automatic silent background refresh
+  setupSilentBackgroundRefresh();
 
   // Set up prayer banner dismiss
   document.getElementById('prayer-dismiss')?.addEventListener('click', () => {
