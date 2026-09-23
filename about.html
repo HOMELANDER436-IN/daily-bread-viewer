@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Daily Bread — About. A daily biblical message, counselling, and prayer reminder app.">
+  <meta name="theme-color" content="#3F5F52">
+  <title>Daily Bread — About</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Mobile & PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body data-page="about">
+
+  <!-- ─── Drawer Overlay ───────────────────────────────────────── -->
+  <div class="drawer-overlay" id="drawer-overlay" role="presentation"></div>
+
+  <!-- ─── Navigation Drawer ───────────────────────────────────── -->
+  <nav class="drawer" id="app-drawer" role="navigation" aria-label="Main navigation">
+    <div class="drawer-header">
+      <div class="drawer-logo" data-i18n="appName">Daily Bread</div>
+      <div class="drawer-tagline" data-i18n="tagline">God's Word, Every Day</div>
+    </div>
+
+    <ul class="drawer-nav" style="list-style:none">
+      <li>
+        <a href="index.html" data-nav="home">
+          <span class="nav-icon">🏠</span>
+          <span data-i18n="home">Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="counselling.html" data-nav="counselling">
+          <span class="nav-icon">🕊️</span>
+          <span data-i18n="counselling">Counselling</span>
+        </a>
+      </li>
+
+      <li><div class="drawer-divider"></div></li>
+
+      <li>
+        <a href="#" onclick="return false;" style="cursor:default; padding-bottom:6px;">
+          <span class="nav-icon">🌐</span>
+          <span data-i18n="language">Language</span>
+        </a>
+        <div class="lang-toggle" style="padding: 0 24px 14px">
+          <button class="lang-btn active" data-lang="en" onclick="window.switchLanguage('en')">English</button>
+          <button class="lang-btn" data-lang="ml" onclick="window.switchLanguage('ml')">മലയാളം</button>
+        </div>
+      </li>
+
+      <li>
+        <a href="about.html" data-nav="about" class="active" aria-current="page">
+          <span class="nav-icon">ℹ️</span>
+          <span data-i18n="about">About</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="drawer-footer">
+      <p style="font-size:0.75rem;color:var(--text-light);text-align:center">
+        Daily Bread © 2026
+      </p>
+    </div>
+  </nav>
+
+  <!-- ─── App Wrapper ──────────────────────────────────────────── -->
+  <div class="app-wrapper">
+
+    <!-- ─── Header ──────────────────────────────────────────────── -->
+    <header class="app-header">
+      <div class="logo" data-i18n="appName">Daily Bread</div>
+      <button
+        class="hamburger-btn"
+        id="hamburger-btn"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="app-drawer"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <!-- ─── Page Content ─────────────────────────────────────────── -->
+    <main class="page-content">
+
+      <div class="counselling-header">
+        <h1>About Daily Bread</h1>
+        <p>A daily biblical message, prayer reminder, and counselling app for believers.</p>
+      </div>
+
+      <div class="message-card" style="margin-top: 0;">
+        <div class="message-body">
+          <h2 class="message-title" style="font-size:1.1rem;">🍞 Our Mission</h2>
+          <p class="message-content" style="font-size:0.95rem;">
+            Daily Bread exists to share God's word daily, encourage believers through prayer, and provide a private space for counselling and spiritual guidance.
+          </p>
+        </div>
+      </div>
+
+      <div class="message-card">
+        <div class="message-body">
+          <h2 class="message-title" style="font-size:1.1rem;">📖 Daily Messages</h2>
+          <p class="message-content" style="font-size:0.95rem;">
+            Read a fresh biblical message every day — in <strong>English</strong> or <strong>Malayalam</strong>. React with a like or dislike to let us know the message touched you.
+          </p>
+        </div>
+      </div>
+
+      <div class="message-card">
+        <div class="message-body">
+          <h2 class="message-title" style="font-size:1.1rem;">🙏 Prayer Reminders</h2>
+          <p class="message-content" style="font-size:0.95rem;">
+            Enable push notifications to receive a daily prayer reminder at the scheduled time. Take a moment to pause, pray, and be still.
+          </p>
+        </div>
+      </div>
+
+      <div class="message-card">
+        <div class="message-body">
+          <h2 class="message-title" style="font-size:1.1rem;">🕊️ Counselling</h2>
+          <p class="message-content" style="font-size:0.95rem;">
+            Need someone to talk to? Submit a private counselling request — your contact details and message are kept strictly confidential.
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: 24px 0 8px; color: var(--text-light); font-size: 0.8rem;">
+        Daily Bread © 2026 · Built with faith &amp; care
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ─── App Script ────────────────────────────────────────────── -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
