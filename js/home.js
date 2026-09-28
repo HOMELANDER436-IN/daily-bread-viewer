@@ -28,9 +28,14 @@ function showSkeleton() {
 // ─── Render: Error State ──────────────────────────────────────
 function showError(msg) {
   const container = document.getElementById('message-container');
+  // Sanitize message: never show raw HTTP status codes, JSON errors, or technical jargon
+  const cleanMsg = (!msg || msg.includes('HTTP') || msg.includes('format') || msg.includes('SyntaxError'))
+    ? t('loadError')
+    : msg;
+
   container.innerHTML = `
     <div class="error-state">
-      <p>${msg || t('loadError')}</p>
+      <p>${cleanMsg}</p>
       <p style="margin-top:6px;font-size:0.82rem;color:var(--text-light)">${t('loadErrorSub')}</p>
       <button class="retry-btn" onclick="window.homeRetry()">${t('retry')}</button>
     </div>
@@ -101,11 +106,11 @@ function renderMessage(message, reactionData) {
 
 // ─── Load Message ─────────────────────────────────────────────
 export async function loadMessage(fromCache = false) {
+  const cached = getCachedMessage();
+
   if (fromCache) {
-    const cached = getCachedMessage();
     if (cached) {
       renderMessage(cached, null);
-      // Then fetch reactions separately
       fetchReactionsForCached(cached.id);
     } else {
       showSkeleton();
@@ -113,13 +118,16 @@ export async function loadMessage(fromCache = false) {
     return;
   }
 
-  showSkeleton();
+  // Only show skeleton if nothing is currently rendered on screen
+  if (!currentMessage && !cached) {
+    showSkeleton();
+  }
 
   try {
     const message = await getLatestMessage();
 
     if (!message) {
-      showEmpty();
+      if (!currentMessage) showEmpty();
       return;
     }
 
@@ -137,11 +145,13 @@ export async function loadMessage(fromCache = false) {
 
     renderMessage(message, reactionData);
   } catch (err) {
-    // Try fallback to cache
-    const cached = getCachedMessage();
-    if (cached) {
-      renderMessage(cached, null);
-      showToast(t('loadError'), 'error');
+    console.info('[Home] Background sync deferred:', err.message);
+    // If we have a cached message, keep it visible peacefully without error banners
+    if (cached || currentMessage) {
+      if (!currentMessage && cached) {
+        renderMessage(cached, null);
+      }
+      // Do not disturb the user with red error toasts if they can already read the message
     } else {
       showError(err.message);
     }
