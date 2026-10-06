@@ -59,6 +59,14 @@ function handleForegroundNotification(payload) {
   const data = payload.data || {};
 
   if (data.type === 'prayer') {
+    // Play church bell notification sound
+    try {
+      const bell = new Audio('/assets/church_bell.mp3');
+      bell.play().catch(e => console.warn('[FCM] Bell audio play prevented:', e.message));
+    } catch (e) {
+      console.warn('[FCM] Could not play bell audio:', e.message);
+    }
+
     // Show prayer banner
     const banner = document.getElementById('prayer-banner');
     if (banner) {
